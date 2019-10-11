@@ -1,15 +1,10 @@
 kind: pipeline
 name: default
 
-platform:
-  os: linux
-  arch: amd64
-
 steps:
-  - name: run-hello-world
-    image: alpine
-    commands:
-      - echo Test
-
-node:
-  instance: agent
+- name: test
+  image: rust:1.30
+  commands:
+  - cd Drone
+  - cargo build --verbose --all
+  - cargo test --verbose --all
